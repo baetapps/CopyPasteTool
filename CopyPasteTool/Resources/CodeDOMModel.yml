@@ -1,0 +1,23 @@
+﻿assemblyNames:
+    - mscorlib.dll
+    - System.Core.dll
+    - System.dll
+    - PresentationCore.dll
+    - PresentationFramework.dll
+    - WindowsBase.dll
+programBody: |-
+    using System;
+    using System.Windows;
+
+    class Program
+    {{
+        [STAThread]
+        private static void Main(string[] args)
+        {{
+            Clipboard.SetText(@"{0}");
+        }}
+    }}
+providerOptions:
+    CompilerVersion : v3.5
+compilerOptions : /win32icon:Resources\copy-paste-icon-v1.ico
+    

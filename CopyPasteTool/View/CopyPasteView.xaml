@@ -1,0 +1,73 @@
+﻿<Controls:MetroWindow x:Class="CopyPasteTool.View.CopyPasteView"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:CopyPasteTool.ViewModel"
+        xmlns:behaviours="clr-namespace:CopyPasteTool.Behaviours"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        MinHeight="250"
+        MinWidth="450"
+        Height="300"
+        Width="450"
+        BorderBrush="{DynamicResource AccentColorBrush}"
+        BorderThickness="1"
+        WindowStartupLocation="CenterScreen"
+        Title="Copy Paste Tool">
+    <Controls:MetroWindow.Resources>
+        <vm:CopyPasteViewModel x:Key="CopyPasteViewModel"/>
+    </Controls:MetroWindow.Resources>
+    <Grid Margin="10" DataContext="{StaticResource ResourceKey=CopyPasteViewModel}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <TextBox Grid.Row="0" AcceptsReturn="True" Text="{Binding Text}" Controls:TextBoxHelper.Watermark="This text will be copied to the clipboard by the generated executable." Controls:TextBoxHelper.ClearTextButton="True"  />
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Margin="0, 10, 0, 0" Grid.Row="0" Text="{Binding ExeName, Mode=TwoWay, ValidatesOnDataErrors=True}" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Name of the file." />
+            <TextBox Margin="0, 10, 0, 0" Grid.Row="1" Text="{Binding SelectedPath, Mode=TwoWay, ValidatesOnDataErrors=True}" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Output folder."/>
+        </Grid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+           
+            <Button Width="50"
+                    Height="50"
+                    Margin="0, 10, 0, 0"
+                    Style="{DynamicResource MetroCircleButtonStyle}">
+                <Rectangle Width="20"
+                           Height="20"
+                           Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Fill"
+                                     Visual="{DynamicResource appbar_folder}" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+                <i:Interaction.Behaviors>
+                    <behaviours:FolderSelectedBehaviour/>
+                </i:Interaction.Behaviors>
+            </Button>
+            <Button Width="50"
+                    Height="50"
+                    Margin="0, 10, 0, 0"
+                    Style="{DynamicResource MetroCircleButtonStyle}"
+                    Command="{Binding CreateExeCommand}">
+                <Rectangle Width="20"
+                           Height="20"
+                           Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Fill"
+                                     Visual="{DynamicResource appbar_thumb_up_add}" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>
+        </StackPanel>
+        <Controls:MetroProgressBar Grid.Row="3" />
+    </Grid>
+</Controls:MetroWindow>
