@@ -162,6 +162,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Licenses\CommonServiceLocator-license.txt" />
+    <Resource Include="Licenses\CopyPasteTool-license.txt" />
+    <Resource Include="Licenses\Entypo-license.txt" />
+    <Resource Include="Licenses\MahApps.Metro-license.txt" />
+    <Resource Include="Licenses\MvvmLightLibs-license.txt" />
+    <Resource Include="Licenses\WindowsIcons-license.txt" />
+    <Resource Include="Licenses\YamlDotNet-license.txt" />
     <Content Include="Resources\copy-paste-icon-v1.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
